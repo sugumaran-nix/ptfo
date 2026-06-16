@@ -9,22 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Dark theme surfaces
-        base: "#0B0B14",
-        surface: "#13131F",
-        "surface-soft": "#191928",
-        border: "#262638",
+        // Dark theme surfaces — midnight slate
+        base: "#060913",
+        surface: "#111827",
+        "surface-soft": "#161f30",
+        border: "#1e293b",
         // Light theme surfaces
         "base-light": "#F6F6FB",
         "surface-light": "#FFFFFF",
         "border-light": "#E7E7F1",
         // Text
-        ink: "#EDEDF5",
+        ink: "#ffffff",
         "ink-light": "#15151F",
-        muted: "#8B8BA3",
+        muted: "#94a3b8",
         "muted-light": "#6B6B82",
         // Brand
-        violet: "#7C5CFC",
+        violet: "#6366f1",
         blue: "#4D7CFE",
         mint: "#34D399",
       },
@@ -36,7 +36,7 @@ const config: Config = {
         content: "1180px",
       },
       backgroundImage: {
-        "brand-gradient": "linear-gradient(135deg, #7C5CFC 0%, #4D7CFE 100%)",
+        "brand-gradient": "linear-gradient(135deg, #6366f1 0%, #4D7CFE 100%)",
       },
       keyframes: {
         "fade-up": {

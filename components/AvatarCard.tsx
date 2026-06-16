@@ -29,18 +29,6 @@ export default function AvatarCard() {
         </div>
       </div>
 
-      {/* Floating badge: years of focused building */}
-      <div className="absolute -left-6 top-10 flex items-center gap-3 rounded-2xl border border-border-light bg-surface-light px-4 py-3 shadow-lg dark:border-border dark:bg-surface sm:-left-10">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-gradient text-sm font-bold text-white">
-          2+
-        </div>
-        <p className="text-xs font-medium leading-tight text-ink-light dark:text-ink">
-          Years
-          <br />
-          Building
-        </p>
-      </div>
-
       {/* Floating badge: code icon */}
       <div className="absolute -bottom-6 -right-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-gradient shadow-lg sm:-right-8">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">

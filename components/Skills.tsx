@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 type Skill = {
   name: string;
   category: string;
-  level: number; // 0-100
+  chips: string[];
   color: string;
   icon: ReactNode;
 };
@@ -12,7 +12,7 @@ const skills: Skill[] = [
   {
     name: "Python",
     category: "Language",
-    level: 90,
+    chips: ["Flask", "FastAPI", "scikit-learn"],
     color: "#34D399",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -24,7 +24,7 @@ const skills: Skill[] = [
   {
     name: "React",
     category: "Frontend",
-    level: 80,
+    chips: ["Next.js", "TypeScript", "Tailwind CSS"],
     color: "#4D7CFE",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -38,7 +38,7 @@ const skills: Skill[] = [
   {
     name: "Flask",
     category: "Backend",
-    level: 85,
+    chips: ["REST APIs", "JWT Auth", "SQLAlchemy"],
     color: "#F2B66D",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -50,7 +50,7 @@ const skills: Skill[] = [
   {
     name: "MongoDB",
     category: "Database",
-    level: 78,
+    chips: ["MySQL", "SQLite", "Schema Design"],
     color: "#34D399",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -63,10 +63,10 @@ const skills: Skill[] = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="border-b border-border-light dark:border-border">
+    <section id="skills" className="scroll-mt-20 border-b border-border-light dark:border-border">
       <div className="mx-auto max-w-content px-6 py-16 sm:px-8 lg:py-24">
         <p className="eyebrow text-violet">My Skills</p>
-        <h2 className="mt-2 font-display text-2xl font-bold text-ink-light dark:text-ink sm:text-3xl">
+        <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink-light dark:text-ink sm:text-3xl">
           Technologies I Work With
         </h2>
 
@@ -87,11 +87,15 @@ export default function Skills() {
               </p>
               <p className="text-xs text-muted-light dark:text-muted">{skill.category}</p>
 
-              <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-border-light dark:bg-border">
-                <div
-                  className="h-full rounded-full"
-                  style={{ width: `${skill.level}%`, backgroundColor: skill.color }}
-                />
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {skill.chips.map((chip) => (
+                  <span
+                    key={chip}
+                    className="rounded-full border border-border-light px-2.5 py-1 text-[11px] font-medium text-muted-light dark:border-border dark:text-muted"
+                  >
+                    {chip}
+                  </span>
+                ))}
               </div>
             </div>
           ))}

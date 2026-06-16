@@ -10,19 +10,20 @@ export default function Hero() {
             Full Stack Developer
           </span>
 
-          <h1 className="mt-6 text-balance font-display text-4xl font-extrabold leading-[1.08] text-ink-light dark:text-ink sm:text-5xl">
-            Sugumaran{" "}
+          <h1 className="mt-6 text-balance font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-ink-light dark:text-ink sm:text-5xl">
+            Engineering at the edge of{" "}
             <span className="bg-gradient-to-r from-violet to-blue bg-clip-text text-transparent">
-              S
+              Full Stack & GenAI
             </span>
           </h1>
           <p className="mt-2 font-display text-xl font-semibold text-muted-light dark:text-muted sm:text-2xl">
-            Full Stack Developer
+            Sugumaran S — Full Stack Developer
           </p>
 
           <p className="mt-5 max-w-lg text-balance text-base leading-relaxed text-muted-light dark:text-muted sm:text-lg">
-            I build modern, responsive and scalable web applications with
-            Python, React and MongoDB — and bring ideas to life on the web.
+            I ship production-grade web apps that wire React and FastAPI
+            backends straight into fine-tuned ML models — from fraud
+            detection pipelines to LLM-powered planning tools.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">

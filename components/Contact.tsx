@@ -35,10 +35,10 @@ const contactDetails = [
 
 export default function Contact() {
   return (
-    <section id="contact">
+    <section id="contact" className="scroll-mt-20">
       <div className="mx-auto max-w-content px-6 py-16 sm:px-8 lg:py-24">
         <p className="eyebrow text-violet">Contact Me</p>
-        <h2 className="mt-2 font-display text-2xl font-bold text-ink-light dark:text-ink sm:text-3xl">
+        <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink-light dark:text-ink sm:text-3xl">
           Get In Touch
         </h2>
         <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-light dark:text-muted sm:text-lg">
@@ -119,7 +119,12 @@ export default function Contact() {
       <footer className="border-t border-border-light dark:border-border">
         <div className="mx-auto flex max-w-content flex-col items-center justify-between gap-2 px-6 py-6 text-xs text-muted-light dark:text-muted sm:flex-row sm:px-8">
           <p>© {new Date().getFullYear()} Sugumaran S. All rights reserved.</p>
-          <p>Coimbatore, Tamil Nadu, India</p>
+          <a
+            href="mailto:sugumarankugan@gmail.com"
+            className="transition-colors hover:text-violet"
+          >
+            sugumarankugan@gmail.com
+          </a>
         </div>
       </footer>
     </section>

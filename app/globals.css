@@ -7,8 +7,8 @@ html {
 }
 
 body {
-  background-color: #0b0b14;
-  color: #ededf5;
+  background-color: #060913;
+  color: #ffffff;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -18,7 +18,7 @@ html.light body {
 }
 
 ::selection {
-  background-color: rgba(124, 92, 252, 0.3);
+  background-color: rgba(99, 102, 241, 0.3);
 }
 
 a:focus-visible,
@@ -26,7 +26,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #7c5cfc;
+  outline: 2px solid #6366f1;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -58,7 +58,7 @@ html.light ::-webkit-scrollbar-thumb {
 
 .bg-grid {
   background-image:
-    radial-gradient(circle at 20% 15%, rgba(124, 92, 252, 0.15), transparent 35%),
+    radial-gradient(circle at 20% 15%, rgba(99, 102, 241, 0.15), transparent 35%),
     radial-gradient(circle at 85% 75%, rgba(77, 124, 254, 0.12), transparent 40%);
 }
 

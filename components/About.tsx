@@ -38,10 +38,10 @@ const info = [
 
 export default function About() {
   return (
-    <section id="about" className="border-b border-border-light dark:border-border">
+    <section id="about" className="scroll-mt-20 border-b border-border-light dark:border-border">
       <div className="mx-auto max-w-content px-6 py-16 sm:px-8 lg:py-24">
         <p className="eyebrow text-violet">About Me</p>
-        <h2 className="mt-2 font-display text-2xl font-bold text-ink-light dark:text-ink sm:text-3xl">
+        <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink-light dark:text-ink sm:text-3xl">
           Who I Am
         </h2>
 
