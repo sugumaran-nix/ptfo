@@ -1,83 +1,66 @@
-# Sugumaran S — Developer Portfolio
+# Sugumaran S — Full-Stack Developer Portfolio
 
-A clean, minimal, and fully responsive personal portfolio built with **Next.js 14**, **Tailwind CSS**, **Framer Motion**, and **TypeScript**.
+A production-ready personal portfolio built with Next.js 14 (App Router) and Tailwind CSS, designed around a single idea: **own every layer, from database to UI.**
 
-## ✨ Features
+## Role classification
 
-- **Hero** — Name, tagline, CTA buttons (View Projects / Download Resume / Contact Me), social links
-- **About** — Short bio + quick-facts card
-- **Skills** — Animated skill bars grouped by category
-- **Projects** — Cards with description, tech stack, GitHub and live links
-- **Contact** — Email, GitHub, LinkedIn links + certifications panel
-- Smooth scroll-triggered Framer Motion animations
-- Fully responsive (mobile, tablet, desktop)
-- Static export — deploy anywhere (Vercel, GitHub Pages, Netlify)
+**Primary role:** Software Engineer (Full-Stack), early-career / junior-to-mid track.
 
-## 🚀 Getting Started
+**Reasoning:** Both source documents emphasize end-to-end ownership — Python/Flask/Node APIs, React frontends, and MySQL/MongoDB persistence — rather than research-style ML work or pure data analysis. The two flagship projects (fake news detection, fake job posting detection) use ML as a *feature* inside a full-stack app (API + dashboard + database), not as standalone modeling work. Seniority is early-career: final-year MCA student, no listed work experience, but a stronger-than-average project portfolio with quantified results (90% accuracy, sub-800ms latency, Docker deployment, unit tests). Key strengths: shipping complete systems, REST API design, and translating ML output into usable interfaces.
+
+## Design direction
+
+Structured, GitHub-inspired dark UI — chosen because the subject's own differentiator is "I work across every layer of the stack." The signature element is a **request/response stack diagram** in the hero: four layers (Client → Frontend → Backend/API → Database) connected by a vertical line with two traveling pulse-dots — one descending (request, mint) and one ascending (response, amber) — visually encoding the literal client-server round trip rather than a decorative animation.
+
+- **Palette:** `#0A0D12` ink background, `#12161D`/`#171C25` panels, `#5EEAD4` mint (request/frontend accent), `#F2B66D` amber (response/backend accent), `#E7ECF2` primary text, `#8B96A5` muted text.
+- **Type:** Space Grotesk (display), IBM Plex Sans (body), IBM Plex Mono (labels, eyebrows, metrics) — a technical pairing distinct from default sans stacks.
+- **Layout:** Single-column narrative with a two-column hero (copy + live stack diagram), a featured-project hero card, and a layered skills grid grouped by architecture tier rather than a flat tag cloud.
+
+## Tech stack
+
+- Next.js 14 (App Router, TypeScript)
+- Tailwind CSS (custom design tokens, no default theme)
+- Zero runtime dependencies beyond React/Next — no env vars, no external API keys required
+
+## Project structure
+
+```
+.
+├── app/
+│   ├── globals.css       # Design tokens, animations, focus states
+│   ├── layout.tsx         # Fonts, metadata
+│   └── page.tsx           # Section composition
+├── components/
+│   ├── Nav.tsx
+│   ├── Hero.tsx
+│   ├── StackDiagram.tsx   # Signature animated diagram
+│   ├── Projects.tsx       # Featured work + project grid
+│   ├── About.tsx
+│   ├── Skills.tsx
+│   └── Contact.tsx
+├── next.config.js
+├── tailwind.config.ts
+├── postcss.config.js
+├── tsconfig.json
+└── package.json
+```
+
+## Local setup
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open `http://localhost:3000`. No environment variables or API keys are required — the entire site is static content rendered client-side.
 
-## 📦 Build & Deploy
+To produce a production build:
 
 ```bash
 npm run build
+npm start
 ```
 
-Generates the `out/` directory — upload to any static host.
+## Content notes
 
-### Deploy to Vercel (recommended)
-
-1. Push this repo to GitHub
-2. Go to [vercel.com](https://vercel.com) → **New Project** → Import your repo
-3. Vercel auto-detects Next.js — click **Deploy**
-
-Done. Your portfolio is live. 🎉
-
-## 🗂 Project Structure
-
-```
-src/
-├── app/
-│   ├── globals.css       # Global styles + CSS variables
-│   ├── layout.tsx        # Root layout + metadata
-│   └── page.tsx          # Main page (assembles sections)
-├── components/
-│   ├── Navbar.tsx
-│   ├── Footer.tsx
-│   └── sections/
-│       ├── HeroSection.tsx
-│       ├── AboutSection.tsx
-│       ├── SkillsSection.tsx
-│       ├── ProjectsSection.tsx
-│       └── ContactSection.tsx
-└── lib/
-    ├── data.ts           # ← Edit all your content here
-    ├── utils.ts
-    └── useInView.ts
-```
-
-## ✏️ Customising Content
-
-**All content lives in `src/lib/data.ts`** — edit your name, bio, projects, skills, and links there. No other files need changing for content updates.
-
-To add your resume, place `resume.pdf` inside the `public/` folder.
-
-## 🎨 Tech Stack
-
-| Tool | Purpose |
-|------|---------|
-| Next.js 14 | Framework |
-| TypeScript | Type safety |
-| Tailwind CSS | Styling |
-| Framer Motion | Animations |
-| DM Sans / DM Serif | Typography |
-| Lucide React | Icons |
-
-## 📄 License
-
-MIT — use freely, attribution appreciated.
+All copy was rewritten from the source resume/LinkedIn — no text was copied verbatim. Metrics (90% accuracy, sub-800ms response time, etc.) are carried over from the original resume's stated figures, not invented. The "AI Study Planner" project is marked **In active development** to reflect its current status accurately.

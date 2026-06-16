@@ -1,36 +1,42 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        background: "rgb(var(--bg))",
-        foreground: "rgb(var(--text-primary))",
-        card: "rgb(var(--surface))",
-        border: "rgb(var(--border))",
-        accent: "rgb(var(--accent))",
-        muted: {
-          DEFAULT: "rgb(var(--bg-alt))",
-          foreground: "rgb(var(--text-secondary))",
-        },
+        ink: "#0A0D12",
+        panel: "#12161D",
+        "panel-soft": "#171C25",
+        line: "#232A35",
+        ash: "#E7ECF2",
+        muted: "#8B96A5",
+        mint: "#5EEAD4",
+        amber: "#F2B66D",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "sans-serif"],
+        body: ["var(--font-body)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
       },
-      borderRadius: {
-        lg: "0.75rem",
-        md: "0.5rem",
-        sm: "0.375rem",
+      maxWidth: {
+        content: "1180px",
+      },
+      keyframes: {
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(14px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "fade-up": "fade-up 0.6s ease-out forwards",
       },
     },
   },
   plugins: [],
 };
+
 export default config;

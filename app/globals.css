@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0d12;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(94, 234, 212, 0.06), transparent 40%),
+    radial-gradient(circle at 88% 92%, rgba(242, 182, 109, 0.05), transparent 45%);
+  color: #e7ecf2;
+}
+
+::selection {
+  background-color: rgba(94, 234, 212, 0.25);
+  color: #ffffff;
+}
+
+/* Visible keyboard focus */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0d12;
+}
+::-webkit-scrollbar-thumb {
+  background: #232a35;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2e3848;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #5eead4;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Stack diagram signature: request travels down, response travels up */
+@keyframes travel-down {
+  0% { top: 0%; opacity: 0; }
+  6% { opacity: 1; }
+  44% { opacity: 1; }
+  50% { top: 100%; opacity: 0; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes travel-up {
+  0% { top: 100%; opacity: 0; }
+  50% { top: 100%; opacity: 0; }
+  56% { opacity: 1; }
+  94% { opacity: 1; }
+  100% { top: 0%; opacity: 0; }
+}
+
+.travel-down {
+  animation: travel-down 6s ease-in-out infinite;
+}
+
+.travel-up {
+  animation: travel-up 6s ease-in-out infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
