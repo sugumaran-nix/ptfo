@@ -3,9 +3,13 @@ import '../styles/global.css';
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = 'Sugumaran S — Full-Stack Developer' } = Astro.props;
+const {
+  title = 'Sugumaran S — Full Stack Developer',
+  description = 'Full Stack Developer portfolio — projects, skills, and contact.',
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -13,9 +17,37 @@ const { title = 'Sugumaran S — Full-Stack Developer' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
     <title>{title}</title>
+    <script is:inline>
+      // Runs before paint to avoid a light/dark flash on load.
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored || (prefersDark ? 'dark' : 'light');
+        if (theme === 'dark') document.documentElement.classList.add('dark');
+      })();
+    </script>
   </head>
-  <body class="font-sans text-[15px] leading-[1.6] overflow-x-hidden">
+  <body class="bg-surface dark:bg-surfaceDark text-ink dark:text-white">
     <slot />
+    <script is:inline>
+      // Drives the .reveal fade-up class for static Astro content.
+      // Interactive islands (cards, bars, form) animate themselves via Framer Motion instead.
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      });
+    </script>
   </body>
 </html>

@@ -1,25 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,md,mdx}'],
   theme: {
     extend: {
       colors: {
-        bg: '#0a0a0a',
-        bg2: '#111111',
-        bg3: '#1a1a1a',
-        border: 'rgba(255,255,255,0.08)',
-        borderHover: 'rgba(255,255,255,0.18)',
-        textMuted: 'rgba(255,255,255,0.45)',
-        textDim: 'rgba(255,255,255,0.22)',
-        pillBg: 'rgba(255,255,255,0.06)',
-        cardFeatured: '#161616',
+        // Light theme surfaces
+        surface: '#ffffff',
+        surfaceMuted: '#fafafa',
+        cardLight: '#ffffff',
+        borderLight: '#eeeeee',
+        // Dark theme surfaces
+        surfaceDark: '#0a0a0a',
+        surfaceDarkMuted: '#000000',
+        cardDark: '#141414',
+        borderDark: 'rgba(255,255,255,0.08)',
+        // Shared accents
+        ink: '#0a0a0a',
+        inkMuted: '#6b6b6b',
+        paper: '#ffffff',
+        paperMuted: 'rgba(255,255,255,0.6)',
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'sans-serif'],
-        mono: ['Space Mono', 'monospace'],
-      },
-      borderRadius: {
-        DEFAULT: '14px',
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
     },
   },

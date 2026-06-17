@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-/**
- * Contact form with animated submit states. Replaces the old
- * vanilla-JS setTimeout handler. Mount with client:visible.
- * Wire the onSubmit handler to your real backend/email service.
- */
 export default function ContactForm() {
   const [status, setStatus] = useState('idle'); // idle | sending | sent
 
@@ -19,86 +14,76 @@ export default function ContactForm() {
     }, 1200);
   };
 
+  const inputClass =
+    'w-full bg-surface dark:bg-surfaceDark border border-borderLight dark:border-borderDark rounded-lg px-4 py-2.5 text-sm text-ink dark:text-white outline-none transition-colors focus:border-ink/30 dark:focus:border-white/30 placeholder:text-inkMuted/60 dark:placeholder:text-white/30';
+
   return (
-    <motion.form
-      className="flex flex-col gap-3.5"
-      onSubmit={handleSubmit}
-      initial={{ opacity: 0, y: 22 }}
+    <motion.div
+      className="rounded-xl border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark p-6 md:p-7"
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+      transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+      <h3 className="text-base font-semibold mb-5">Send me a message</h3>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="f-name" className="text-sm font-medium">Name</label>
+            <input id="f-name" type="text" placeholder="Your name" required className={inputClass} />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="f-email" className="text-sm font-medium">Email</label>
+            <input id="f-email" type="email" placeholder="your.email@example.com" required className={inputClass} />
+          </div>
+        </div>
+
         <div className="flex flex-col gap-1.5">
-          <label className="font-mono text-[10px] text-textDim uppercase tracking-widest" htmlFor="f-name">
-            Name
-          </label>
-          <input
-            className="bg-bg2 border border-border rounded-[10px] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/30 placeholder:text-textDim"
-            id="f-name"
-            type="text"
-            placeholder="Your name"
+          <label htmlFor="f-subject" className="text-sm font-medium">Subject</label>
+          <input id="f-subject" type="text" placeholder="What's this about?" className={inputClass} />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="f-message" className="text-sm font-medium">Message</label>
+          <textarea
+            id="f-message"
+            placeholder="Tell me about your project..."
             required
+            rows={4}
+            className={`${inputClass} resize-none`}
           />
         </div>
-        <div className="flex flex-col gap-1.5">
-          <label className="font-mono text-[10px] text-textDim uppercase tracking-widest" htmlFor="f-email">
-            Email
-          </label>
-          <input
-            className="bg-bg2 border border-border rounded-[10px] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/30 placeholder:text-textDim"
-            id="f-email"
-            type="email"
-            placeholder="your@email.com"
-            required
-          />
-        </div>
-      </div>
 
-      <div className="flex flex-col gap-1.5">
-        <label className="font-mono text-[10px] text-textDim uppercase tracking-widest" htmlFor="f-subject">
-          Subject
-        </label>
-        <input
-          className="bg-bg2 border border-border rounded-[10px] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/30 placeholder:text-textDim"
-          id="f-subject"
-          type="text"
-          placeholder="What's this about?"
-        />
-      </div>
+        <button
+          type="submit"
+          disabled={status === 'sending'}
+          className="self-start mt-1 inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-lg bg-ink text-white dark:bg-white dark:text-ink transition-opacity hover:opacity-85 disabled:opacity-60"
+        >
+          {status === 'idle' && (
+            <>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Send Message
+            </>
+          )}
+          {status === 'sending' && 'Sending...'}
+          {status === 'sent' && 'Sent ✓'}
+        </button>
 
-      <div className="flex flex-col gap-1.5">
-        <label className="font-mono text-[10px] text-textDim uppercase tracking-widest" htmlFor="f-message">
-          Message
-        </label>
-        <textarea
-          className="bg-bg2 border border-border rounded-[10px] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-white/30 placeholder:text-textDim resize-none min-h-[130px] leading-relaxed"
-          id="f-message"
-          placeholder="Your message..."
-          required
-        />
-      </div>
-
-      <button
-        className="font-mono text-[13px] px-9 py-4 bg-white text-bg rounded-full tracking-wide transition-opacity hover:opacity-86 self-start mt-1 disabled:opacity-60"
-        type="submit"
-        disabled={status === 'sending'}
-      >
-        {status === 'sending' ? 'Transmitting...' : status === 'sent' ? 'Transmitted ✓' : 'Send Transmission ➔'}
-      </button>
-
-      <AnimatePresence>
-        {status === 'sent' && (
-          <motion.p
-            className="font-mono text-[11px] text-textMuted mt-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            Message received. I'll get back to you shortly.
-          </motion.p>
-        )}
-      </AnimatePresence>
-    </motion.form>
+        <AnimatePresence>
+          {status === 'sent' && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-sm text-inkMuted dark:text-white/60"
+            >
+              Message received. I'll get back to you shortly.
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </form>
+    </motion.div>
   );
 }

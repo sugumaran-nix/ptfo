@@ -2,244 +2,265 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import ProficiencyBar from '../components/ProficiencyBar.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
-import SkillCard from '../components/SkillCard.jsx';
-import RevealOnScroll from '../components/RevealOnScroll.jsx';
 import ContactForm from '../components/ContactForm.jsx';
+
+const proficiency = [
+  { label: 'JavaScript / TypeScript', percent: 85 },
+  { label: 'Next.js / React', percent: 80 },
+  { label: 'Python (FastAPI)', percent: 80 },
+  { label: 'SQL (PostgreSQL/MySQL)', percent: 78 },
+  { label: 'Git / GitHub', percent: 85 },
+  { label: 'Cloud (AWS Basics)', percent: 55 },
+];
+
+const skillGroups = [
+  { title: 'Frontend', skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'GSAP'] },
+  { title: 'Backend', skills: ['Node.js', 'Express.js', 'Python', 'FastAPI', 'REST APIs'] },
+  { title: 'Database', skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'] },
+  { title: 'Tools & Practices', skills: ['Git', 'GitHub', 'Docker', 'Linux/Bash', 'Agile/Scrum'] },
+];
 
 const projects = [
   {
-    num: '01 / PRODUCTION FRAMEWORKS',
+    image: 'https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?w=800&q=80',
+    title: 'AI Fake News Detection Platform',
+    desc: 'A full-stack platform (VeritAI) that classifies news authenticity using an ML pipeline, with a FastAPI backend and a Next.js frontend, delivered as a deployable package.',
+    tags: ['Next.js', 'Python', 'FastAPI', 'Scikit-Learn'],
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
+    title: 'AI Study Planner & Smart Learning Assistant',
+    desc: 'A motion-driven scheduling assistant with GSAP animations on the frontend and a Claude-integrated FastAPI backend for adaptive study planning.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Claude API'],
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1488229297570-58520851e868?w=800&q=80',
     title: 'ML-Powered Fake Job Detector',
-    desc: 'An automated anomaly classification pipeline built with high-performance server components to parse and isolate recruitment scams from multi-source datasets.',
-    metric: 'Real-Time Data Streams — Highly Balanced Models',
-    stack: ['Next.js', 'Python', 'NLP', 'Scikit-Learn'],
-    href: 'https://github.com/sugumaran-nix',
+    desc: 'An anomaly classification pipeline that parses and flags recruitment scams from multi-source job listing datasets using NLP.',
+    tags: ['Python', 'NLP', 'Scikit-Learn'],
   },
   {
-    num: '02 / LOW-LATENCY INFRASTRUCTURE',
-    title: 'Distributed Fake News Platform',
-    desc: 'A completely decoupled architecture combining static optimization with lightweight reactivity for instantaneous content validation.',
-    metric: 'Sub-800ms API Latencies — Optimized Core Web Vitals',
-    stack: ['Astro', 'React', 'FastAPI', 'REST Ecosystem'],
-    href: 'https://github.com/sugumaran-nix',
-  },
-  {
-    num: '03 / INTERACTIVE UTILITIES',
-    title: 'AI Dynamic Study Planner',
-    desc: 'A mobile-first administrative dashboard using fluid, performance-tuned scheduling blocks and smooth motion layouts across devices.',
-    metric: '40% Operational Overhead Reduction — Smooth Scroll Physics',
-    stack: ['SvelteKit', 'Node.js', 'GSAP', 'Data Engines'],
-    href: 'https://github.com/sugumaran-nix',
-  },
-];
-
-const skills = [
-  {
-    category: 'Languages & Ecosystem',
-    skills: 'JavaScript (ES6+), TypeScript, Python (FastAPI, Scikit-Learn), Java, C/C++, SQL',
-  },
-  {
-    category: 'Frontend & UX',
-    skills: 'React.js, Next.js, SvelteKit, Astro, Tailwind CSS, GSAP, Framer Motion, Lenis Smooth Scroll',
-  },
-  {
-    category: 'Backend & Data',
-    skills: 'Node.js, Express.js, PostgreSQL/MySQL (Query Tuning), MongoDB, Redis, RESTful Microservices',
-  },
-  {
-    category: 'Infrastructure & DevOps',
-    skills: 'Git (Distributed), GitHub, Docker, AWS (S3, EC2), CI/CD (GitHub Actions), Linux/Bash',
-  },
-  {
-    category: 'Tools & Practices',
-    skills: 'System Design, Data Structures & Algorithms (DSA), Unit Testing, Agile/Scrum, Responsive Architecture',
+    image: 'https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=800&q=80',
+    title: 'Web Scraping Tool',
+    desc: 'A Python-based scraping tool built during my BCA final year for structured data extraction — my first independent project.',
+    tags: ['Python', 'Web Scraping', 'Automation'],
   },
 ];
 
 const socials = [
-  {
-    label: 'GitHub',
-    href: 'https://github.com/sugumaran-nix',
-    icon: 'M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z',
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://linkedin.com/in/sugumaran-nix',
-    icon: 'M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.14 2.07 2.07 0 010 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z',
-  },
-  {
-    label: 'Email',
-    href: 'mailto:sugumarankugan@gmail.com',
-    icon: 'M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z',
-  },
-  {
-    label: '+91 63810 74457',
-    href: 'tel:+916381074457',
-    icon: 'M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z',
-  },
+  { label: 'GitHub', href: 'https://github.com/an0nl', icon: 'M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/sugumaran0333', icon: 'M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.14 2.07 2.07 0 010 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z' },
+  { label: 'Email', href: 'mailto:sugumarankugan@gmail.com', icon: 'M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z' },
 ];
 ---
 
 <Layout>
   <Navbar />
 
-  <!-- HERO -->
-  <section id="hero" class="relative overflow-hidden min-h-screen flex flex-col justify-end px-6 md:px-12 pt-28 pb-12 md:pt-24 md:pb-14">
-    <div class="absolute rounded-full border border-border pointer-events-none w-[280px] h-[280px] md:w-[440px] md:h-[440px] -top-16 -right-20 md:-top-24 md:-right-28"></div>
-    <div class="absolute rounded-full border border-border pointer-events-none w-[120px] h-[120px] md:w-[200px] md:h-[200px] bottom-32 left-12 md:left-60 hidden md:block"></div>
-
-    <h1 class="text-[64px] md:text-[136px] font-bold leading-[0.92] tracking-tight">
-      Full-Stack<br />
-      <span class="block text-right">Developer.</span>
-    </h1>
-
-    <div class="flex flex-col md:flex-row md:items-end gap-6 md:gap-12 mt-9">
-      <p class="max-w-[380px] text-sm text-textMuted leading-loose">
-        Engineering <em class="text-white italic">ultra-fast, motion-driven web applications</em> and robust backend systems.
-        Focused on utilizing <em class="text-white italic">production-ready frameworks</em> to create seamless,
-        high-performance user experiences.
+  <!-- HOME / HERO -->
+  <section id="home" class="min-h-[88vh] flex flex-col items-center justify-center text-center px-6 py-20">
+    <div class="reveal">
+      <h1 class="text-[44px] md:text-[64px] font-bold leading-[1.05] tracking-tight mb-6">
+        Full Stack<br />Developer
+      </h1>
+      <p class="max-w-[560px] mx-auto text-base text-inkMuted dark:text-white/60 leading-relaxed mb-9">
+        I build clean, responsive web applications with modern tools — from MCA coursework
+        projects to deployable AI-integrated platforms. Focused on writing maintainable code
+        and shipping things that work end to end.
       </p>
-      <div class="flex gap-3 md:ml-auto">
-        <a class="font-mono text-xs px-7 py-3.5 bg-white text-bg rounded-full whitespace-nowrap transition-opacity hover:opacity-86" href="#projects">View My Work</a>
-        <a class="font-mono text-xs px-7 py-3.5 border border-borderHover text-white rounded-full whitespace-nowrap transition-colors hover:bg-white/5" href="#contact">Get in Touch</a>
+
+      <div class="flex items-center justify-center gap-3 mb-9">
+        <a href="#projects" class="text-sm font-medium px-6 py-2.5 rounded-lg bg-ink text-white dark:bg-white dark:text-ink transition-opacity hover:opacity-85">
+          View My Work
+        </a>
+        <a href="#contact" class="text-sm font-medium px-6 py-2.5 rounded-lg border border-borderLight dark:border-borderDark text-ink dark:text-white transition-colors hover:bg-black/5 dark:hover:bg-white/5">
+          Get In Touch
+        </a>
+      </div>
+
+      <div class="flex items-center justify-center gap-5">
+        {socials.map((s) => (
+          <a
+            href={s.href}
+            target={s.href.startsWith('http') ? '_blank' : undefined}
+            rel={s.href.startsWith('http') ? 'noopener' : undefined}
+            aria-label={s.label}
+            class="text-inkMuted dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors"
+          >
+            <svg viewBox="0 0 24 24" class="w-[18px] h-[18px] fill-current"><path d={s.icon}></path></svg>
+          </a>
+        ))}
       </div>
     </div>
-
-    <div class="flex flex-wrap gap-2.5 mt-8">
-      {socials.map((s) => (
-        <a
-          class="flex items-center gap-2 px-4.5 py-2.5 bg-pillBg border border-border rounded-full text-textMuted font-mono text-[11px] tracking-wide transition-colors hover:border-borderHover hover:text-white"
-          href={s.href}
-          target={s.href.startsWith('http') ? '_blank' : undefined}
-          rel={s.href.startsWith('http') ? 'noopener' : undefined}
-        >
-          <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d={s.icon}></path></svg>
-          {s.label}
-        </a>
-      ))}
-    </div>
   </section>
-
-  <div class="h-px bg-border mx-6 md:mx-12"></div>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="px-6 md:px-12 py-16 md:py-22">
-    <RevealOnScroll client:visible className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-13">
-      <h2 class="text-[38px] md:text-[72px] font-bold tracking-tight leading-none">Projects</h2>
-      <a class="font-mono text-xs px-7 py-3.5 border border-borderHover text-white rounded-full whitespace-nowrap transition-colors hover:bg-white/5 self-start md:self-auto" href="https://github.com/sugumaran-nix" target="_blank" rel="noopener">
-        View All on GitHub →
-      </a>
-    </RevealOnScroll>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {projects.map((p, i) => (
-        <ProjectCard client:visible {...p} delay={i * 0.06} />
-      ))}
-    </div>
-  </section>
-
-  <div class="h-px bg-border mx-6 md:mx-12"></div>
 
   <!-- ABOUT -->
-  <section id="about" class="px-6 md:px-12 py-16 md:py-18 grid grid-cols-1 md:grid-cols-[1fr_300px] gap-12 md:gap-16 items-start">
-    <RevealOnScroll client:visible>
-      <h2 class="text-[32px] md:text-[52px] font-bold tracking-tight leading-tight mb-7">
-        MCA Graduate.<br />Full-Stack<br />Engineer.
-      </h2>
-      <p class="text-sm text-textMuted leading-[1.85] mb-4">
-        I'm Sugumaran, an MCA graduate (2026) from Sri Venkateshwara College of Computer Applications and Management,
-        Coimbatore, specializing in <em class="text-white italic">Full-Stack Development</em>. I build fast, motion-driven
-        frontends with Next.js, Astro, and SvelteKit, paired with FastAPI and Node.js backends — most recently shipping a
-        full-stack <em class="text-white italic">AI Fake News Detection Platform</em> and an AI-powered Study Planner with
-        a Claude-integrated FastAPI backend.
+  <section id="about" class="bg-surfaceMuted dark:bg-surfaceDarkMuted px-6 md:px-10 py-20">
+    <div class="reveal text-center mb-14">
+      <h2 class="text-3xl md:text-[42px] font-bold tracking-tight mb-4">About Me</h2>
+      <p class="max-w-[640px] mx-auto text-base text-inkMuted dark:text-white/60 leading-relaxed">
+        I'm an MCA graduate (2026) building practical, deployable full-stack projects while
+        preparing to start my career as a software developer.
       </p>
-      <p class="text-sm text-textMuted leading-[1.85] mb-4">
-        My approach centers on <em class="text-white italic">optimizing digital experiences</em> — clean component
-        architecture, query-tuned databases, and advanced motion libraries like GSAP and Framer Motion — to ship
-        production-ready, high-fidelity interfaces backed by solid systems design.
-      </p>
-      <p class="text-sm text-textMuted leading-[1.85]">
-        I'm actively seeking full-time Full-Stack Developer and AI/ML-adjacent engineering roles, and I'm always open
-        to building something ambitious from scratch.
-      </p>
-    </RevealOnScroll>
+    </div>
 
-    <RevealOnScroll client:visible delay={0.14} className="w-full">
-      <div class="w-full aspect-[3/4] bg-bg3 rounded-[14px] border border-border overflow-hidden">
-        <img src="/profile.jpg" alt="Sugumaran S" class="w-full h-full object-cover" />
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+      <div class="reveal">
+        <h3 class="text-xl font-semibold mb-4">My Journey</h3>
+        <div class="flex flex-col gap-4 text-sm text-inkMuted dark:text-white/60 leading-[1.8]">
+          <p>
+            My path into software started during my BCA at Bharathiar University, where I built
+            a Python-based web scraping tool as my first independent project. That hands-on
+            experience pulled me toward full-stack development, and I went on to pursue an MCA
+            at Sri Venkateshwara College of Computer Applications and Management, specializing
+            in Full Stack Development.
+          </p>
+          <p>
+            Since then I've focused on shipping complete, working systems rather than isolated
+            exercises — pairing Next.js and modern frontend tooling with FastAPI backends, and
+            recently integrating the Claude API into a study planning assistant.
+          </p>
+          <p>
+            I'm currently preparing to enter the job market as a fresher, with certifications
+            across SQL, cloud fundamentals, and AI/ML, and I'm looking for a Full-Stack
+            Developer or AI-adjacent engineering role where I can keep building.
+          </p>
+        </div>
       </div>
-    </RevealOnScroll>
-  </section>
 
-  <div class="h-px bg-border mx-6 md:mx-12"></div>
-
-  <!-- SKILLS -->
-  <section id="skills" class="px-6 md:px-12 py-16 md:py-22">
-    <RevealOnScroll client:visible>
-      <h2 class="text-[38px] md:text-[72px] font-bold tracking-tight leading-none mb-13">Technical Skills</h2>
-    </RevealOnScroll>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-      {skills.map((s, i) => (
-        <SkillCard client:visible category={s.category} skills={s.skills} delay={i * 0.04} />
-      ))}
+      <div class="reveal" style="transition-delay: 0.1s">
+        <div class="rounded-xl border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark p-8 text-center">
+          <div class="w-20 h-20 mx-auto rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center mb-5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-9 h-9">
+              <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <h4 class="text-lg font-semibold mb-1">Sugumaran S</h4>
+          <p class="text-sm text-inkMuted dark:text-white/60 mb-4">Full Stack Developer</p>
+          <p class="text-sm text-inkMuted dark:text-white/60">Based in Coimbatore, Tamil Nadu</p>
+          <p class="text-sm text-inkMuted dark:text-white/60">Open to full-time opportunities</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <div class="h-px bg-border mx-6 md:mx-12"></div>
+  <!-- SKILLS -->
+  <section id="skills" class="px-6 md:px-10 py-20">
+    <div class="reveal text-center mb-14">
+      <h2 class="text-3xl md:text-[42px] font-bold tracking-tight mb-4">Skills & Technologies</h2>
+      <p class="max-w-[640px] mx-auto text-base text-inkMuted dark:text-white/60 leading-relaxed">
+        The tools and technologies I use to design, build, and ship full-stack applications.
+      </p>
+    </div>
+
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="reveal">
+        <h3 class="text-lg font-semibold mb-5">Proficiency</h3>
+        {proficiency.map((p, i) => (
+          <ProficiencyBar client:visible label={p.label} percent={p.percent} delay={i * 0.05} />
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {skillGroups.map((g, i) => (
+          <div class="reveal rounded-xl border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark p-5" style={`transition-delay: ${i * 0.05}s`}>
+            <h4 class="text-sm font-semibold mb-3">{g.title}</h4>
+            <div class="flex flex-wrap gap-1.5">
+              {g.skills.map((s) => (
+                <span class="text-xs px-2.5 py-1 rounded-full bg-black/5 dark:bg-white/10 text-ink dark:text-white/80">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="bg-surfaceMuted dark:bg-surfaceDarkMuted px-6 md:px-10 py-20">
+    <div class="reveal text-center mb-14">
+      <h2 class="text-3xl md:text-[42px] font-bold tracking-tight mb-4">Featured Projects</h2>
+      <p class="max-w-[640px] mx-auto text-base text-inkMuted dark:text-white/60 leading-relaxed">
+        A selection of projects I've built, from MCA coursework to deployable AI-integrated platforms.
+      </p>
+    </div>
+
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+      {projects.map((p, i) => (
+        <ProjectCard client:visible {...p} delay={i * 0.08} />
+      ))}
+    </div>
+
+    <div class="flex justify-center mt-10">
+      <a
+        href="https://github.com/an0nl"
+        target="_blank"
+        rel="noopener"
+        class="text-sm font-medium px-6 py-2.5 rounded-lg border border-borderLight dark:border-borderDark text-ink dark:text-white transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+      >
+        View All Projects on GitHub
+      </a>
+    </div>
+  </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="px-6 md:px-12 py-16 md:py-28 border-t border-border">
-    <RevealOnScroll client:visible>
-      <h2 class="text-[52px] md:text-[110px] font-bold tracking-tight leading-none mb-14">Contact</h2>
-    </RevealOnScroll>
+  <section id="contact" class="px-6 md:px-10 py-20">
+    <div class="reveal text-center mb-14">
+      <h2 class="text-3xl md:text-[42px] font-bold tracking-tight mb-4">Get In Touch</h2>
+      <p class="max-w-[640px] mx-auto text-base text-inkMuted dark:text-white/60 leading-relaxed">
+        I'm currently looking for full-time Full-Stack Developer roles. Reach out if you'd like to talk.
+      </p>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
-      <RevealOnScroll client:visible>
-        <h3 class="text-2xl md:text-[38px] font-bold tracking-tight leading-tight mb-5">Let's build something scalable.</h3>
-        <p class="text-sm text-textMuted leading-[1.82] mb-9">
-          I am currently considering innovative, full-time full-stack development and backend engineering positions.
-          Reach out directly through the adjacent portal or drop a line via my communication coordinates.
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+      <div class="reveal">
+        <h3 class="text-lg font-semibold mb-5">Contact Information</h3>
+        <div class="flex flex-col gap-5 mb-8">
+          <div class="flex items-start gap-3.5">
+            <div class="w-9 h-9 rounded-lg bg-black/5 dark:bg-white/10 flex items-center justify-center flex-shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold">Email</p>
+              <a href="mailto:sugumarankugan@gmail.com" class="text-sm text-inkMuted dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors">sugumarankugan@gmail.com</a>
+            </div>
+          </div>
+          <div class="flex items-start gap-3.5">
+            <div class="w-9 h-9 rounded-lg bg-black/5 dark:bg-white/10 flex items-center justify-center flex-shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02z" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold">Phone</p>
+              <a href="tel:+916381074457" class="text-sm text-inkMuted dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors">+91 63810 74457</a>
+            </div>
+          </div>
+          <div class="flex items-start gap-3.5">
+            <div class="w-9 h-9 rounded-lg bg-black/5 dark:bg-white/10 flex items-center justify-center flex-shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold">Location</p>
+              <p class="text-sm text-inkMuted dark:text-white/60">Coimbatore, Tamil Nadu</p>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="text-base font-semibold mb-2">Let's Connect</h4>
+        <p class="text-sm text-inkMuted dark:text-white/60 leading-relaxed">
+          Whether you have an opening, a project in mind, or just want to talk tech, I'd love to hear from you.
         </p>
-
-        <div class="flex flex-col gap-3.5 mb-9">
-          <div class="flex items-center gap-3.5">
-            <span class="font-mono text-[10px] text-textDim uppercase tracking-widest w-[72px] flex-shrink-0">Direct</span>
-            <a class="text-sm text-white transition-colors hover:text-textMuted" href="tel:+916381074457">+91 63810 74457</a>
-          </div>
-          <div class="flex items-center gap-3.5">
-            <span class="font-mono text-[10px] text-textDim uppercase tracking-widest w-[72px] flex-shrink-0">Inbox</span>
-            <a class="text-sm text-white transition-colors hover:text-textMuted" href="mailto:sugumarankugan@gmail.com">sugumarankugan@gmail.com</a>
-          </div>
-          <div class="flex items-center gap-3.5">
-            <span class="font-mono text-[10px] text-textDim uppercase tracking-widest w-[72px] flex-shrink-0">Hub</span>
-            <span class="text-sm text-white">Coimbatore, Tamil Nadu</span>
-          </div>
-          <div class="flex items-center gap-3.5">
-            <span class="font-mono text-[10px] text-textDim uppercase tracking-widest w-[72px] flex-shrink-0">LinkedIn</span>
-            <a class="text-sm text-white transition-colors hover:text-textMuted" href="https://linkedin.com/in/sugumaran-nix" target="_blank" rel="noopener">linkedin.com/in/sugumaran-nix</a>
-          </div>
-          <div class="flex items-center gap-3.5">
-            <span class="font-mono text-[10px] text-textDim uppercase tracking-widest w-[72px] flex-shrink-0">GitHub</span>
-            <a class="text-sm text-white transition-colors hover:text-textMuted" href="https://github.com/sugumaran-nix" target="_blank" rel="noopener">github.com/sugumaran-nix</a>
-          </div>
-        </div>
-
-        <div class="flex gap-2.5">
-          {socials.slice(0, 2).map((s) => (
-            <a
-              class="flex items-center justify-center w-10 h-10 bg-pillBg border border-border rounded-full text-textMuted transition-colors hover:border-borderHover hover:text-white"
-              href={s.href}
-              target="_blank"
-              rel="noopener"
-              aria-label={s.label}
-            >
-              <svg viewBox="0 0 24 24" class="w-4 h-4 fill-current"><path d={s.icon}></path></svg>
-            </a>
-          ))}
-        </div>
-      </RevealOnScroll>
+      </div>
 
       <ContactForm client:visible />
     </div>
