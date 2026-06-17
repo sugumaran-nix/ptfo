@@ -26,26 +26,30 @@ const projects = [
   {
     image: 'https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?w=800&q=80',
     title: 'AI Fake News Detection Platform',
-    desc: 'A full-stack platform (VeritAI) that classifies news authenticity using an ML pipeline, with a FastAPI backend and a Next.js frontend, delivered as a deployable package.',
-    tags: ['Next.js', 'Python', 'FastAPI', 'Scikit-Learn'],
+    desc: 'A full-stack platform (VeritAI) that classifies news authenticity using transformer models, with a FastAPI backend and a Next.js frontend, delivered as a deployable package.',
+    tags: ['Next.js', 'Python', 'FastAPI', 'Transformers'],
+    href: 'https://github.com/sugumaran-nix/aiFakenewsDetector',
   },
   {
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
     title: 'AI Study Planner & Smart Learning Assistant',
     desc: 'A motion-driven scheduling assistant with GSAP animations on the frontend and a Claude-integrated FastAPI backend for adaptive study planning.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Claude API'],
+    href: 'https://github.com/sugumaran-nix/StudyPlanner',
   },
   {
     image: 'https://images.unsplash.com/photo-1488229297570-58520851e868?w=800&q=80',
     title: 'ML-Powered Fake Job Detector',
-    desc: 'An anomaly classification pipeline that parses and flags recruitment scams from multi-source job listing datasets using NLP.',
-    tags: ['Python', 'NLP', 'Scikit-Learn'],
+    desc: 'A fake job posting detector using four classifiers with URL fraud heuristics and explainable AI to flag recruitment scams.',
+    tags: ['Python', 'Scikit-Learn', 'Explainable AI'],
+    href: 'https://github.com/sugumaran-nix/fake-job-posting-ml',
   },
   {
     image: 'https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=800&q=80',
     title: 'Web Scraping Tool',
     desc: 'A Python-based scraping tool built during my BCA final year for structured data extraction — my first independent project.',
     tags: ['Python', 'Web Scraping', 'Automation'],
+    href: 'https://github.com/sugumaran-nix',
   },
 ];
 
@@ -106,7 +110,7 @@ const socials = [
       </p>
     </div>
 
-    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
       <div class="reveal">
         <h3 class="text-xl font-semibold mb-4">My Journey</h3>
         <div class="flex flex-col gap-4 text-sm text-inkMuted dark:text-white/60 leading-[1.8]">
@@ -126,8 +130,8 @@ const socials = [
         </div>
       </div>
 
-      <div class="reveal md:mt-12" style="transition-delay: 0.1s">
-        <div class="rounded-xl border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark p-8 md:p-10 text-center flex flex-col items-center justify-center min-h-[320px]">
+      <div class="reveal h-full" style="transition-delay: 0.1s">
+        <div class="h-full rounded-xl border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark p-8 md:p-10 text-center flex flex-col items-center justify-center">
           <div class="w-20 h-20 mx-auto rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center mb-6">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-9 h-9">
               <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
