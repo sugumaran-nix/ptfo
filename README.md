@@ -1,4 +1,4 @@
-# Sugumaran S — Portfolio (Astro + Tailwind + Framer Motion)
+# Sugumaran S — Portfolio 
 
 ## Setup
 npm install
