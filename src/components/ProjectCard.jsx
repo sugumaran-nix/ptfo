@@ -6,7 +6,13 @@ const GitHubIcon = () => (
   </svg>
 );
 
-export default function ProjectCard({ image, title, desc, tags, href, delay = 0 }) {
+const ExternalLinkIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5 flex-shrink-0">
+    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export default function ProjectCard({ image, title, desc, tags, href, demoHref, comingSoon = false, delay = 0 }) {
   return (
     <motion.div
       className="rounded-xl overflow-hidden border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark flex flex-col h-full"
@@ -32,16 +38,35 @@ export default function ProjectCard({ image, title, desc, tags, href, delay = 0 
             </span>
           ))}
         </div>
-        {href && (
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center gap-1.5 text-xs text-inkMuted dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors mt-1"
-          >
-            <GitHubIcon />
-            View on GitHub
-          </a>
+        {comingSoon ? (
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 w-fit mt-1">
+            🚧 Coming Soon
+          </span>
+        ) : (
+          <div className="flex items-center gap-4 mt-1">
+            {demoHref && (
+              <a
+                href={demoHref}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-1.5 text-xs text-inkMuted dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors"
+              >
+                <ExternalLinkIcon />
+                View Demo
+              </a>
+            )}
+            {href && (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-1.5 text-xs text-inkMuted dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors"
+              >
+                <GitHubIcon />
+                View on GitHub
+              </a>
+            )}
+          </div>
         )}
       </div>
     </motion.div>
