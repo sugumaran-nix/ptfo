@@ -2,16 +2,24 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import ProficiencyBar from '../components/ProficiencyBar.jsx';
 import ProjectCard from '../components/ProjectCard.jsx';
 import ContactForm from '../components/ContactForm.jsx';
 
+const proficiency = [
+  { label: 'JavaScript / TypeScript', percent: 85 },
+  { label: 'Next.js / React', percent: 80 },
+  { label: 'Python (FastAPI)', percent: 80 },
+  { label: 'SQL (PostgreSQL/MySQL)', percent: 78 },
+  { label: 'Git / GitHub', percent: 85 },
+  { label: 'Cloud (AWS Basics)', percent: 55 },
+];
+
 const skillGroups = [
-  { title: 'Languages', skills: ['Python', 'JavaScript', 'SQL'] },
-  { title: 'Frontend', skills: ['React.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3'] },
-  { title: 'Backend & API', skills: ['FastAPI', 'Flask', 'Node.js', 'REST APIs'] },
-  { title: 'AI / ML', skills: ['Hugging Face', 'Scikit-learn', 'NLP', 'TF-IDF', 'Transformers', 'Explainable AI'] },
-  { title: 'Databases', skills: ['MySQL', 'MongoDB', 'SQLite', 'PostgreSQL'] },
-  { title: 'Tools & OS', skills: ['Git', 'GitHub', 'VS Code', 'Linux'] },
+  { title: 'Frontend', skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'GSAP'] },
+  { title: 'Backend', skills: ['Node.js', 'Express.js', 'Python', 'FastAPI', 'REST APIs'] },
+  { title: 'Database', skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'] },
+  { title: 'Tools & Practices', skills: ['Git', 'GitHub', 'Docker', 'Linux/Bash', 'Agile/Scrum'] },
 ];
 
 const projects = [
@@ -154,7 +162,13 @@ const socials = [
       </p>
     </div>
 
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="reveal">
+        <h3 class="text-lg font-semibold mb-5">Proficiency</h3>
+        {proficiency.map((p, i) => (
+          <ProficiencyBar client:visible label={p.label} percent={p.percent} delay={i * 0.05} />
+        ))}
+      </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {skillGroups.map((g, i) => (
