@@ -15,7 +15,7 @@ const ExternalLinkIcon = () => (
 export default function ProjectCard({ image, title, desc, tags, href, demoHref, comingSoon = false, delay = 0 }) {
   return (
     <motion.div
-      className="rounded-xl overflow-hidden border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark flex flex-col h-full"
+      className="rounded-xl overflow-hidden border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark shadow-card hover:shadow-cardHover transition-shadow flex flex-col h-full"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
@@ -49,7 +49,7 @@ export default function ProjectCard({ image, title, desc, tags, href, demoHref, 
                 href={demoHref}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center gap-1.5 text-xs text-inkMuted dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-accent dark:text-accentDark hover:text-accentHover dark:hover:opacity-80 transition-colors"
               >
                 <ExternalLinkIcon />
                 View Demo

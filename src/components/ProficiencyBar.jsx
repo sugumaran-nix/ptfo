@@ -13,7 +13,7 @@ export default function ProficiencyBar({ label, percent, delay = 0 }) {
       </div>
       <div className="w-full h-1.5 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
         <motion.div
-          className="h-full rounded-full bg-ink dark:bg-white"
+          className="h-full rounded-full bg-accent dark:bg-accentDark"
           initial={{ width: 0 }}
           whileInView={{ width: `${percent}%` }}
           viewport={{ once: true, amount: 0.3 }}

@@ -15,11 +15,11 @@ export default function ContactForm() {
   };
 
   const inputClass =
-    'w-full bg-surface dark:bg-surfaceDark border border-borderLight dark:border-borderDark rounded-lg px-4 py-2.5 text-sm text-ink dark:text-white outline-none transition-colors focus:border-ink/30 dark:focus:border-white/30 placeholder:text-inkMuted/60 dark:placeholder:text-white/30';
+    'w-full bg-surface dark:bg-surfaceDark border border-borderLight dark:border-borderDark rounded-lg px-4 py-2.5 text-sm text-ink dark:text-white outline-none transition-colors focus:border-accent dark:focus:border-accentDark focus:ring-2 focus:ring-accent/15 dark:focus:ring-accentDark/20 placeholder:text-inkMuted/60 dark:placeholder:text-white/30';
 
   return (
     <motion.div
-      className="rounded-xl border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark p-6 md:p-7"
+      className="rounded-xl border border-borderLight dark:border-borderDark bg-cardLight dark:bg-cardDark shadow-card p-6 md:p-7"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
@@ -57,7 +57,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'sending'}
-          className="self-start mt-1 inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-lg bg-ink text-white dark:bg-white dark:text-ink transition-opacity hover:opacity-85 disabled:opacity-60"
+          className="self-start mt-1 inline-flex items-center gap-2 text-sm font-medium px-5 py-2.5 rounded-lg bg-accent dark:bg-accentDark text-white transition-colors hover:bg-accentHover dark:hover:opacity-90 disabled:opacity-60"
         >
           {status === 'idle' && (
             <>
