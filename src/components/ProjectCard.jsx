@@ -20,8 +20,8 @@ export default function ProjectCard({ image, title, desc, tags, href, demoHref, 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
-      whileHover={{ y: -3, scale: 1.012, transition: { duration: 0.1, ease: 'easeOut', delay: 0 } }}
-      whileTap={{ scale: 0.99, transition: { duration: 0.08 } }}
+      whileHover={{ y: -3, scale: 1.006, transition: { duration: 0.1, ease: 'easeOut', delay: 0 } }}
+      whileTap={{ scale: 0.996, transition: { duration: 0.08 } }}
     >
       <div className="w-full aspect-[16/10] overflow-hidden bg-black/5 dark:bg-white/5">
         <img src={image} alt={title} className="w-full h-full object-cover" loading="lazy" />
